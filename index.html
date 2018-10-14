@@ -2,10 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>WebPack Server Test Page</title>
+    <title>Видео стримы</title>
+    <meta name="viewport" content="width=device-width">
     <link rel='stylesheet' href='dist/style.css'>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
+    <main>
+        <div class="video-container">
+            <div class="video-container-item">
+                <video id="v1" autoplay muted></video>
+                <div class="video-controls">
+                    <div class="volume-bar"><canvas width="25" height="100"></canvas></div>
+                    <div class="filters">
+                        <div class="brightness-filter filter-toggle">
+                            <span class="filter-name">Brightness </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                        <div class="contrast-filter filter-toggle">
+                            <span class="filter-name">Contrast </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                    </div>
+                    <div class="close-btn">
+                        <button>Все камеры</button>
+                    </div>
+                </div>
+            </div>
+            <div class="video-container-item">
+                <video id="v2" autoplay></video>
+                <div class="video-controls">
+                    <div class="volume-bar"><canvas width="25" height="100"></canvas></div>
+                    <div class="filters">
+                        <div class="brightness-filter filter-toggle">
+                            <span class="filter-name">Brightness </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                        <div class="contrast-filter filter-toggle">
+                            <span class="filter-name">Contrast </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                    </div>
+                    <div class="close-btn">
+                        <button>Все камеры</button>
+                    </div>
+                </div>
+            </div>
+            <div class="video-container-item">
+                <video id="v3" autoplay muted></video>
+                <div class="video-controls">
+                    <div class="volume-bar"><canvas width="25" height="100"></canvas></div>
+                    <div class="filters">
+                        <div class="brightness-filter filter-toggle">
+                            <span class="filter-name">Brightness </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                        <div class="contrast-filter filter-toggle">
+                            <span class="filter-name">Contrast </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                    </div>
+                    <div class="close-btn">
+                        <button>Все камеры</button>
+                    </div>
+                </div>
+            </div>
+            <div class="video-container-item">
+                <video id="v4" autoplay muted></video>
+                <div class="video-controls">
+                    <div class="volume-bar"><canvas width="25" height="100"></canvas></div>
+                    <div class="filters">
+                        <div class="brightness-filter filter-toggle">
+                            <span class="filter-name">Brightness </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                        <div class="contrast-filter filter-toggle">
+                            <span class="filter-name">Contrast </span><input class="form-input" type="range" name="track" max="100" value="50" />
+                        </div>
+                    </div>
+                    <div class="close-btn">
+                        <button>Все камеры</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="dist/bundle.js"></script>
 </body>
 </html>
