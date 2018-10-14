@@ -18,31 +18,6 @@ html, body {
   margin: 50px auto;
 }
 
-@media screen and (max-width: 800px) {
-  .video-container {
-    height: 470px;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .video-container {
-    height: 410px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .video-container {
-    height: 350px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .video-container {
-    height: 290px;
-  }
-}
-
-
 /**************************************************
 Стили для видео блоков
  *************************************************/
@@ -98,6 +73,41 @@ html, body {
 .volume-bar {
   overflow: hidden;
   height: 90px;
+}
+
+@media screen and (max-width: 900px) {
+  .video-controls {
+    transform: scale(0.8);
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .video-container {
+    height: 470px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .video-container {
+    height: 410px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .video-container {
+    height: 350px;
+  }
+  .video-controls {
+    transform: scale(0.6) translateX(-20%) translateY(33%);
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .video-container {
+    height: 290px;
+  }
 }
 
 /**************************************************

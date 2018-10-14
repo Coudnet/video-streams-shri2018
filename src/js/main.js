@@ -1,24 +1,30 @@
 'use strict';
-import {videoList} from './data.js'
+import {videoList} from './data.js'  // Данные о видео
 
-let container = null;
-let canvas = null;
-let volumeBarCanvasContext = null;
+let container = null; // .video-container для открытого видео
+let canvas = null; // canvas для открытого видео
+let volumeBarCanvasContext = null; // canvas context для открытого видео, на которм отображается бар для громкости
 let videoTimerId = null;
 let audioTimerId = null;
-let currentVideo = null;
+let currentVideo = null; // Объект открытого видео
 let context = new (window.AudioContext || window.webkitAudioContext)();
 let analyser = context.createAnalyser();
 
+// Промежуточный canvas canvaslkz j,hf,jnrb bpj,hf;tybz
 const backcanvas = document.createElement('canvas');
 const bc = backcanvas.getContext('2d');
 
-analyser.connect(context.destination);
+analyser.connect(context.destination); // Подключение анализатора к аудиовыходу пользователя
 
 videoList.forEach((videoItem) => {
     initVideo(videoItem)
 });
 
+/**
+ * Инициализация каждого видео блока
+ * Навешивание обработчиков и запись начальных значений для input
+ * @param videoItem
+ */
 function initVideo(videoItem) {
     const video = document.getElementById(videoItem.id);
     const url = videoItem.src;
@@ -55,7 +61,9 @@ function videoClickHandler(event) {
     container = event.target.parentNode;
     container.classList.add('z-index-1');
     container.classList.add('video-open');
+
     if(!currentVideo.source) currentVideo.source = context.createMediaElementSource(video);
+
     container.querySelector('.brightness-filter input').value = currentVideo.brightness;
     container.querySelector('.contrast-filter input').value = currentVideo.contrast;
     video.muted = false;
