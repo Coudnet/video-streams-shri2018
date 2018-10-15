@@ -4,13 +4,13 @@ import {videoList} from './data.js'  // Данные о видео
 let container = null; // .video-container для открытого видео
 let canvas = null; // canvas для открытого видео
 let volumeBarCanvasContext = null; // canvas context для открытого видео, на которм отображается бар для громкости
-let videoTimerId = null;
-let audioTimerId = null;
+let videoTimerId = null; // Таймер для отрисовки видео в canvas
+let audioTimerId = null; // Таймер для анализа громкости
 let currentVideo = null; // Объект открытого видео
 let context = new (window.AudioContext || window.webkitAudioContext)();
 let analyser = context.createAnalyser();
 
-// Промежуточный canvas canvaslkz j,hf,jnrb bpj,hf;tybz
+// Промежуточный canvas для обработки
 const backcanvas = document.createElement('canvas');
 const bc = backcanvas.getContext('2d');
 
@@ -55,6 +55,13 @@ function initVideo(videoItem) {
     closeBtn.addEventListener('click', buttonClickHandler);
 }
 
+/**
+ * Обработчик открытия видео
+ * Инициализация глобальных переменных, которые хранят родителя тега video
+ * Запускается анимация(css3) добавлением класса
+ * Инициализация стартовых значений яркости, контраста( сохраненных в объекте)
+ * При повторном открытии видео, настройки сохраняются
+ */
 function videoClickHandler(event) {
     currentVideo = videoList.find(x => x.id === event.target.id);
     const video = document.getElementById(currentVideo.id);
@@ -71,6 +78,9 @@ function videoClickHandler(event) {
     initCanvas();
 }
 
+/**
+ * Обработчик закрытия(сворачивания) видео
+ */
 function buttonClickHandler() {
     container.classList.add('z-index-1');
     container.classList.add('video-open');
@@ -83,6 +93,10 @@ function buttonClickHandler() {
     }, 200);
 }
 
+/**
+ * Инициализация canvas для отрисловки видео при открытии
+ * Добавление canvas в контейнер с видео, старт отрисовки и анаиза громкости
+ */
 function initCanvas() {
     const video = container.querySelector('video');
     canvas = document.createElement('canvas');
@@ -104,6 +118,10 @@ function initCanvas() {
 
 }
 
+/**
+ * Отрисовка текущего видео потока в canvas при размернутом видео
+ * Вызываются функции для обработки изображения - яркость и контраст
+ */
 function draw(v, c, w, h) {
     let img;
     if(v.paused || v.ended) return false;
@@ -117,6 +135,11 @@ function draw(v, c, w, h) {
     }, 16);
 }
 
+/**
+ * Старт анализатора громкости.
+ * Текущая Video Node подсоединяется к анализатору
+ * и запускается рекрсивный таймер для анализа громкости
+ */
 function volumeAnylyzerStart() {
     currentVideo.source.connect(analyser);
     volumeBarCanvasContext = container.querySelector('.volume-bar canvas').getContext('2d');
@@ -136,12 +159,19 @@ function volumeAnylyzerStart() {
     }, 50);
 }
 
+/**
+ * Отрисовка уровня громкости в canvas
+ */
 function drawVolumeBar(average) {
     volumeBarCanvasContext.clearRect(0, 0, 25, 100);
     volumeBarCanvasContext.fillRect(0, 100, 25, -10 * average);
     volumeBarCanvasContext.stroke();
 }
 
+/**
+ * Очистка таймеров, которые использовались для отрисчовки canvas с видео и уровня громкости
+ * Удаление canvas с видео
+ */
 function disableCanvas() {
     clearTimeout(videoTimerId);
     clearTimeout(audioTimerId);
